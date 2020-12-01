@@ -1,10 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {createGlobalStyle} from 'styled-components'
+import normalize from 'styled-normalize'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 
+export const GlobalStyle = createGlobalStyle`
+  ${normalize}
+  div {
+    box-sizing: border-box;
+  }
+`
+
 ReactDOM.render(
   <React.StrictMode>
+    <GlobalStyle />
     <App />
   </React.StrictMode>,
   document.getElementById('root')
