@@ -1,5 +1,6 @@
 import React, {FC} from 'react'
 import styled from 'styled-components'
+import {Avatar} from './Avatar'
 
 const MessageBoxContainer = styled.div`
   display: flex;
@@ -25,11 +26,15 @@ const MessageBoxContainer = styled.div`
 
 export const MessageBox: FC<{
   author: string
-  avatarRender: () => React.ReactNode,
   bubbleRender: () => React.ReactNode
+  avatarRender?: () => React.ReactNode,
 }> = props => (
   <MessageBoxContainer>
-    <div className='avatar'>{props.avatarRender()}</div>
+    <div className='avatar'>{
+      typeof props.avatarRender === 'function'
+        ? props.avatarRender()
+        : <Avatar name={props.author} />
+    }</div>
     <div className='content'>
       <div className='author'>{props.author}</div>
       <div className='bubble'>{props.bubbleRender()}</div>

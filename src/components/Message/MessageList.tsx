@@ -28,7 +28,7 @@ export const MessageList: FC<{
         element
       }
     })
-  }, [props.children])
+  }, [children])
 
   function renderMessage(message: MessageData) {
     const renderer = messageRenders?.find(it => it.match === message.type)
