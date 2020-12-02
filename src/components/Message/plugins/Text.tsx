@@ -5,9 +5,11 @@ import {MessageBox} from '../MessageBox'
 
 export const TextPlugin: FC<MessageComponentProps> = props => {
   const { message } = props
+
   if (!message || !message.data) {
     return null
   }
+
   return (
     <MessageBox
       author={message.author}

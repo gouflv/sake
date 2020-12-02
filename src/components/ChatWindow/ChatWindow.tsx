@@ -33,7 +33,7 @@ export const ChatWindow: FC<{
   name: string
 }> = props => {
   const [messages, setMessages] = useState<MessageData[]>(() => {
-    return Array.from({ length: 5 }).map((_, i) => {
+    return Array.from({ length: 10 }).map((_, i) => {
       if (!i) {
         return {
           id: nanoid(),
@@ -42,12 +42,12 @@ export const ChatWindow: FC<{
           data: `${props.name} just created a group.`
         }
       }
-      if (i === 4) {
+      if (i === 9) {
         return {
           id: nanoid(),
           author: faker.name.firstName(),
           type: MessageType.IMAGE,
-          data: `//placeimg.com/640/480/animals?t=${Date.now() / 1000}`
+          data: '//placeimg.com/640/480/animals'
         }
       }
       return {

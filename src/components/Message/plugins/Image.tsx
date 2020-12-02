@@ -45,7 +45,7 @@ const Status = styled.div`
   color: #777;
 `
 
-const ImageRender: FC<{ url: string }> = ({ url }) => {
+const ImageLoader: FC<{ url: string }> = ({ url }) => {
   const {loading, error} = useImageLoader(url)
 
   if (loading) {
@@ -71,7 +71,7 @@ export const ImagePlugin: FC<MessageComponentProps> = props => {
   return (
     <MessageBox
       author={message.author}
-      bubbleRender={() => <ImageRender url={message.data} />}
+      bubbleRender={() => <ImageLoader url={message.data} />}
     />
   )
 }

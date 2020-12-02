@@ -9,9 +9,11 @@ const Notification = styled.div`
 
 export const NotificationPlugin: FC<MessageComponentProps> = props => {
   const { message } = props
+
   if (!message || !message.data) {
     return null
   }
+
   return (
     <Notification>{message.data}</Notification>
   )
