@@ -41,6 +41,11 @@ const Status = styled.div`
   color: #777;
 `
 
+const FakeSizeImage = styled(Image)`
+  height: 225px;
+  background: #f1f1f1;
+`
+
 const ImageLoader: FC<{ url: string; onLoaded?: () => void }> = ({ url, onLoaded }) => {
   const {loading, error} = useImageLoader(url)
 
@@ -50,16 +55,12 @@ const ImageLoader: FC<{ url: string; onLoaded?: () => void }> = ({ url, onLoaded
     }
   }, [loading, onLoaded])
 
-  if (loading) {
-    return <Status>Loading...</Status>
-  }
-
   if (error) {
     return <Status>Failed</Status>
   }
 
   return (
-    <Image src={url} />
+    <FakeSizeImage src={url} />
   )
 }
 
