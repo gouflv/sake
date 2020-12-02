@@ -27,10 +27,6 @@ function useImageLoader(url: string) {
     img.addEventListener('error', onError)
     img.src = url
 
-    if (img.complete) {
-      onLoad()
-    }
-
     return () => {
       img.removeEventListener('load', onLoad)
       img.removeEventListener('error', onError)
@@ -45,8 +41,14 @@ const Status = styled.div`
   color: #777;
 `
 
-const ImageLoader: FC<{ url: string }> = ({ url }) => {
+const ImageLoader: FC<{ url: string; onLoaded?: () => void }> = ({ url, onLoaded }) => {
   const {loading, error} = useImageLoader(url)
+
+  useEffect(() => {
+    if (typeof onLoaded === 'function' && !loading) {
+      onLoaded()
+    }
+  }, [loading, onLoaded])
 
   if (loading) {
     return <Status>Loading...</Status>
@@ -71,7 +73,7 @@ export const ImagePlugin: FC<MessageComponentProps> = props => {
   return (
     <MessageBox
       author={message.author}
-      bubbleRender={() => <ImageLoader url={message.data} />}
+      bubbleRender={() => <ImageLoader url={message.data} onLoaded={props.onLayoutUpdate} />}
     />
   )
 }

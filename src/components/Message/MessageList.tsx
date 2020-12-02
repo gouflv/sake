@@ -1,4 +1,4 @@
-import {Children, cloneElement, FC, isValidElement, useEffect, useMemo, useRef} from 'react'
+import {Children, cloneElement, FC, isValidElement, useCallback, useEffect, useMemo, useRef} from 'react'
 import styled from 'styled-components'
 import {MessageComponentProps, MessageData} from '../../typing'
 import {Box} from '../StyledComponents'
@@ -36,16 +36,23 @@ export const MessageList: FC<{
       console.error(`Message render no found: ${message.type}`)
       return null
     }
-    return cloneElement(renderer.element, {message})
+    return cloneElement(renderer.element, {
+      message,
+      onLayoutUpdate: onContentLayoutUpdate
+    })
   }
 
   const ref = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
+  const onContentLayoutUpdate = useCallback(() => {
     if (ref.current) {
       ref.current.scrollTop = ref.current.scrollHeight
     }
-  }, [data])
+  }, [])
+
+  useEffect(() => {
+    onContentLayoutUpdate()
+  }, [data, onContentLayoutUpdate])
 
   return (
     <MessageListContainer ref={ref}>

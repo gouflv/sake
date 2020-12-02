@@ -14,4 +14,5 @@ export interface MessageData {
 export interface MessageComponentProps {
   match: MessageType
   message?: MessageData
+  onLayoutUpdate?: () => void
 }
