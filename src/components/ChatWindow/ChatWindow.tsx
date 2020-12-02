@@ -29,6 +29,23 @@ const ChatWindowFooter = styled(Box)`
 `
 const ActionButton = styled(Button)``
 
+function getImageMessage() {
+  return {
+    id: nanoid(),
+    author: faker.name.firstName(),
+    type: MessageType.IMAGE,
+    data: `//placeimg.com/640/480/animals?t=${Date.now()}`
+  }
+}
+function getTextMessage() {
+  return {
+    id: nanoid(),
+    author: faker.name.firstName(),
+    type: MessageType.TEXT,
+    data: faker.lorem.sentence()
+  }
+}
+
 export const ChatWindow: FC<{
   name: string
 }> = props => {
@@ -37,27 +54,37 @@ export const ChatWindow: FC<{
       if (!i) {
         return {
           id: nanoid(),
-          author: faker.name.firstName(),
+          author: 'NOTIFICATION',
           type: MessageType.NOTIFICATION,
           data: `${props.name} just created a group.`
         }
       }
       if (i === 9) {
-        return {
-          id: nanoid(),
-          author: faker.name.firstName(),
-          type: MessageType.IMAGE,
-          data: '//placeimg.com/640/480/animals'
-        }
+        return getImageMessage()
       }
-      return {
-        id: nanoid(),
-        author: faker.name.firstName(),
-        type: MessageType.TEXT,
-        data: faker.lorem.sentence()
-      }
+      return getTextMessage()
     })
   })
+
+  function sendNotification() {
+    setMessages(prevState => [
+      ...prevState,
+      {
+        id: nanoid(),
+        author: 'NOTIFICATION',
+        type: MessageType.NOTIFICATION,
+        data: `${faker.name.firstName()} has joined this group.`
+      }
+    ])
+  }
+
+  function sendText() {
+    setMessages(prevState => [...prevState, getTextMessage()])
+  }
+
+  function sendImage() {
+    setMessages(prevState => [...prevState, getImageMessage()])
+  }
 
   return (
     <ChatWindowContainer>
@@ -70,9 +97,9 @@ export const ChatWindow: FC<{
         </MessageList>
       </ChatWindowMain>
       <ChatWindowFooter>
-        <ActionButton>Add a new friend</ActionButton>
-        <ActionButton>Say some thing</ActionButton>
-        <ActionButton>Post a Sticker</ActionButton>
+        <ActionButton onClick={sendNotification}>Add a new friend</ActionButton>
+        <ActionButton onClick={sendText}>Say some thing</ActionButton>
+        <ActionButton onClick={sendImage}>Post a Sticker</ActionButton>
       </ChatWindowFooter>
     </ChatWindowContainer>
   )
