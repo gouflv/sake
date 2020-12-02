@@ -5,3 +5,10 @@ export const Box = styled.div`
   border-radius: 4px;
   background: #fff;
 `
+
+export const Button = styled.button`
+  padding: 0.5rem 1rem;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`

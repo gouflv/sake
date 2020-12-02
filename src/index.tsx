@@ -7,6 +7,10 @@ import reportWebVitals from './reportWebVitals'
 
 export const GlobalStyle = createGlobalStyle`
   ${normalize}
+  body {
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;
+    padding: 1rem;
+  }
   div {
     box-sizing: border-box;
   }

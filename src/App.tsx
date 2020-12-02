@@ -1,10 +1,11 @@
 import React from 'react'
-import ChatWindow from './components/ChatWindow'
+import {ChatWindow} from './components/ChatWindow'
+import {name as fakeName} from 'faker'
 
 function App() {
   return (
     <div className='App'>
-      <ChatWindow name='Chat Room' />
+      <ChatWindow name={fakeName.firstName()} />
     </div>
   )
 }

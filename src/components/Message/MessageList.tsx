@@ -2,10 +2,9 @@ import {FC} from 'react'
 import styled from 'styled-components'
 import {Message} from '../../typing'
 import {Box} from '../StyledComponents'
-import {MessagePlugins} from './index'
 
 const MessageListContainer = styled(Box)`
-  padding: 1em;
+  padding: 1rem;
   height: 450px;
 `
 
