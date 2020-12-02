@@ -4,6 +4,8 @@ import {FC, useState} from 'react'
 import styled from 'styled-components'
 import {MessageData, MessageType} from '../../typing'
 import {MessageList} from '../Message'
+import {ImagePlugin} from '../Message/plugins/Image'
+import {NotificationPlugin} from '../Message/plugins/Notification'
 import {TextPlugin} from '../Message/plugins/Text'
 import {Box, Button} from '../StyledComponents'
 
@@ -31,24 +33,44 @@ export const ChatWindow: FC<{
   name: string
 }> = props => {
   const [messages, setMessages] = useState<MessageData[]>(() => {
-    return Array.from({ length: 10 }).map(() => ({
-      id: nanoid(),
-      author: faker.name.firstName(),
-      type: MessageType.TEXT,
-      data: faker.lorem.sentence()
-    }))
+    return Array.from({ length: 5 }).map((_, i) => {
+      if (!i) {
+        return {
+          id: nanoid(),
+          author: faker.name.firstName(),
+          type: MessageType.NOTIFICATION,
+          data: `${props.name} just created a group.`
+        }
+      }
+      if (i === 4) {
+        return {
+          id: nanoid(),
+          author: faker.name.firstName(),
+          type: MessageType.IMAGE,
+          data: `//placeimg.com/640/480/animals?t=${Date.now() / 1000}`
+        }
+      }
+      return {
+        id: nanoid(),
+        author: faker.name.firstName(),
+        type: MessageType.TEXT,
+        data: faker.lorem.sentence()
+      }
+    })
   })
 
   return (
     <ChatWindowContainer>
       <ChatWindowHeader>{`${props.name}'s Group`}</ChatWindowHeader>
       <ChatWindowMain>
-        <MessageList messages={messages}>
+        <MessageList data={messages}>
           <TextPlugin match={MessageType.TEXT} />
+          <ImagePlugin match={MessageType.IMAGE} />
+          <NotificationPlugin match={MessageType.NOTIFICATION} />
         </MessageList>
       </ChatWindowMain>
       <ChatWindowFooter>
-        <ActionButton>Add Member</ActionButton>
+        <ActionButton>Add a new friend</ActionButton>
         <ActionButton>Say some thing</ActionButton>
         <ActionButton>Post a Sticker</ActionButton>
       </ChatWindowFooter>

@@ -12,3 +12,9 @@ export const Button = styled.button`
   border: 1px solid #ccc;
   border-radius: 4px;
 `
+
+export const Image = styled.img`
+  max-width: 300px;
+  border-radius: 4px;
+`
+

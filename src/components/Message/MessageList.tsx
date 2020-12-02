@@ -5,14 +5,14 @@ import {Box} from '../StyledComponents'
 
 const MessageListContainer = styled(Box)`
   padding: 1rem;
-  height: 450px;
+  height: 500px;
   overflow-y: auto;
 `
 
 export const MessageList: FC<{
-  messages: MessageData[]
+  data: MessageData[]
 }> = props => {
-  const { children, messages } = props
+  const { children, data } = props
 
   const messageRenders = useMemo(() => {
     return Children.map(children, element => {
@@ -33,6 +33,7 @@ export const MessageList: FC<{
   function renderMessage(message: MessageData) {
     const renderer = messageRenders?.find(it => it.match === message.type)
     if (!renderer) {
+      console.error(`Message render no found: ${message.type}`)
       return null
     }
     return cloneElement(renderer.element, {message})
@@ -40,14 +41,9 @@ export const MessageList: FC<{
 
   return (
     <MessageListContainer>
-      {messages.map(message => {
-        return (
-          <div key={message.id}>{renderMessage(message)}</div>
-        )
-        // const messageRender = MessagePlugins.getMessageRender(message.type)
-        // if (!messageRender) return
-        // return <div key={message.id}>{messageRender(message)}</div>
-      })}
+      {data.map(message => (
+        <div key={message.id}>{renderMessage(message)}</div>
+      ))}
     </MessageListContainer>
   )
 }
