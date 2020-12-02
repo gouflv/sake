@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react'
+import {FC, memo, useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {MessageComponentProps} from '../../../typing'
 import {Image} from '../../StyledComponents'
@@ -63,7 +63,7 @@ const ImageLoader: FC<{ url: string; onLoaded?: () => void }> = ({ url, onLoaded
   )
 }
 
-export const ImagePlugin: FC<MessageComponentProps> = props => {
+export const ImagePlugin: FC<MessageComponentProps> = memo(props => {
   const { message } = props
 
   if (!message || !message.data) {
@@ -76,4 +76,4 @@ export const ImagePlugin: FC<MessageComponentProps> = props => {
       bubbleRender={() => <ImageLoader url={message.data} onLoaded={props.onLayoutUpdate} />}
     />
   )
-}
+})
