@@ -2,7 +2,7 @@ import faker from 'faker'
 import {nanoid} from 'nanoid'
 import {FC, useState} from 'react'
 import styled from 'styled-components'
-import {Message, MessageType} from '../../typing'
+import {MessageData, MessageType} from '../../typing'
 import {MessageList} from '../Message'
 import {TextPlugin} from '../Message/plugins/Text'
 import {Box, Button} from '../StyledComponents'
@@ -30,12 +30,12 @@ const ActionButton = styled(Button)``
 export const ChatWindow: FC<{
   name: string
 }> = props => {
-  const [messages, setMessages] = useState<Message[]>(() => {
+  const [messages, setMessages] = useState<MessageData[]>(() => {
     return Array.from({ length: 10 }).map(() => ({
       id: nanoid(),
       author: faker.name.firstName(),
       type: MessageType.TEXT,
-      data: faker.lorem.slug()
+      data: faker.lorem.sentence()
     }))
   })
 

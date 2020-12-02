@@ -1,5 +1,6 @@
 import {FC} from 'react'
+import styled from 'styled-components'
 
-export const Bubble: FC = props => (
-  <div></div>
-)
+export const Bubble = styled.div`
+  
+`

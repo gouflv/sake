@@ -1,19 +1,17 @@
-import {FC} from 'react'
-
 export enum MessageType {
-  TEXT,
-  IMAGE,
-  NOTIFICATION
+  TEXT = 'TEXT',
+  IMAGE = 'IMAGE',
+  NOTIFICATION = 'NOTIFICATION'
 }
 
-export interface Message {
-  id: number
+export interface MessageData {
+  id: string
   author: string
   type: MessageType
   data: any
 }
 
-export interface MessagePlugin {
-  type: MessageType
-  render: FC<Message>
+export interface MessageComponentProps {
+  match: MessageType
+  message?: MessageData
 }
