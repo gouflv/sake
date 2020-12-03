@@ -16,5 +16,9 @@ export const Button = styled.button`
 export const Image = styled.img`
   max-width: 300px;
   border-radius: 4px;
+
+  @media screen and (max-width: 768px) {
+    max-width: 60vw;
+  }
 `
 

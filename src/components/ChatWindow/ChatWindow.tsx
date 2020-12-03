@@ -14,6 +14,10 @@ const ChatWindowContainer = styled(Box)`
   margin: 0 auto;
   padding: 1rem;
   background: rgba(128, 128, 128, 0.1);
+  
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `
 const ChatWindowHeader = styled.div`
   margin-bottom: 1rem;
@@ -26,6 +30,19 @@ const ChatWindowFooter = styled(Box)`
   padding: 1rem;
   display: flex;
   justify-content: space-around;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+    
+    button {
+      display: block;
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+    button:last-child {
+      margin-bottom: 0;
+    }
+  }
 `
 const ActionButton = styled(Button)``
 
